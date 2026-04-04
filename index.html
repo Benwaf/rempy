@@ -108,9 +108,59 @@
 
     <!-- Scripts -->
     <script>
-        // Small UI helpers
-        document.getElementById('year').textContent = new Date().getFullYear();
+        (function(){
+    const countries = [
+        "Algeria","Angola","Benin","Botswana","Burkina Faso","Burundi","Cabo Verde","Cameroon",
+        "Central African Republic","Chad","Comoros","Congo","Côte d'Ivoire","Democratic Republic of the Congo",
+        "Djibouti","Egypt","Equatorial Guinea","Eritrea","Eswatini","Ethiopia","Gabon","Gambia","Ghana",
+        "Guinea","Guinea-Bissau","Kenya","Lesotho","Liberia","Libya","Madagascar","Malawi","Mali",
+        "Mauritania","Mauritius","Morocco","Mozambique","Namibia","Niger","Nigeria","Rwanda",
+        "Sao Tome and Principe","Senegal","Seychelles","Sierra Leone","Somalia","South Africa",
+        "South Sudan","Sudan","Tanzania","Togo","Tunisia","Uganda","Zambia","Zimbabwe"
+    ];
+
+    const main = document.querySelector('main') || document.body;
+    if(!main) return;
+
+    const section = document.createElement('section');
+    section.id = 'africa-select';
+    section.setAttribute('aria-labelledby', 'africa-select-heading');
+
+    const h2 = document.createElement('h2');
+    h2.id = 'africa-select-heading';
+    h2.textContent = 'Select an African country';
+    section.appendChild(h2);
+
+    const formGroup = document.createElement('div');
+    const label = document.createElement('label');
+    label.htmlFor = 'country';
+    label.textContent = 'Country';
+    formGroup.appendChild(label);
+
+    const select = document.createElement('select');
+    select.id = 'country';
+    select.name = 'country';
+    select.required = true;
+
+    const placeholderOpt = document.createElement('option');
+    placeholderOpt.value = '';
+    placeholderOpt.textContent = '-- Choose a country --';
+    placeholderOpt.disabled = false;
+    placeholderOpt.selected = true;
+    select.appendChild(placeholderOpt);
+
+    countries.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        select.appendChild(opt);
+    });
+
+    formGroup.appendChild(select);
+    section.appendChild(formGroup);
+    main.appendChild(section);
+})();
     </script>
     <script src="main.js" defer></script>
 </body>
-</html> 
+</html>
